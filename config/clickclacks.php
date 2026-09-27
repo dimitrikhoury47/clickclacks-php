@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 return [
     /*
-    | A secret server key (cks_live_…), from Settings › API keys › Server keys. Keep it in
-    | the environment, never in the repository. With no key, calls are accepted and dropped.
+    | A secret server key (cks_live_…), from Sources › your server source › Secret keys.
+    | Keep it in the environment, never in the repository. With no key, calls are accepted
+    | and dropped.
     */
     'key' => env('CLICKCLACKS_SERVER_KEY'),
 
