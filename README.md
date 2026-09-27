@@ -55,7 +55,7 @@ Laravel.
 
 ### Laravel
 
-The service provider and the `ClickClacks` facade are auto-discovered. Add the key to
+Laravel 11 or later. The service provider and the `ClickClacks` facade are auto-discovered. Add the key to
 `.env`:
 
 ```dotenv

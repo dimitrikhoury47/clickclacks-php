@@ -28,10 +28,15 @@ jobs:
           extensions: curl, json, zlib
           coverage: none
           tools: composer:v2
+      - run: composer validate --strict
+      # The Laravel integration is tested on Laravel 11+, which needs PHP 8.2. On PHP 8.1
+      # only Laravel 10 would install, and it's end-of-life with open security advisories.
+      - name: Drop Testbench on PHP 8.1
+        if: matrix.php == '8.1'
+        run: composer remove --dev orchestra/testbench --no-update --no-interaction
       - name: Install dependencies
         run: composer update --no-interaction --no-progress --prefer-dist ${{ matrix.lowest && '--prefer-lowest' || '' }}
-      - run: composer validate --strict
-      - run: vendor/bin/phpunit
+      - run: vendor/bin/phpunit ${{ matrix.php == '8.1' && '--testsuite unit' || '' }}
 
   static:
     name: PHPStan and code style
