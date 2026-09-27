@@ -46,7 +46,7 @@ final class ClientTest extends TestCase
             ['flushInterval' => 5000],
         ] as $options) {
             try {
-                new Client(['key' => self::KEY, 'autoFlush' => false, ...$options]);
+                new Client(['key' => MockApi::KEY, 'autoFlush' => false, ...$options]);
                 self::fail('Expected ' . json_encode($options) . ' to be refused');
             } catch (\InvalidArgumentException) {
                 $this->addToAssertionCount(1);
@@ -56,7 +56,7 @@ final class ClientTest extends TestCase
 
     public function testHasTheDocumentedDefaults(): void
     {
-        $client = new Client(['key' => self::KEY, 'autoFlush' => false]);
+        $client = new Client(['key' => MockApi::KEY, 'autoFlush' => false]);
         self::assertSame('https://app.clickclacks.io', $client->host);
         self::assertSame(100, $client->flushAt);
         self::assertSame(10_000, $client->maxQueueSize);
@@ -85,8 +85,8 @@ final class ClientTest extends TestCase
         $result = $client->flush();
         self::assertSame(['request_rejected'], $this->errorCodes());
         foreach ($result->errors as $error) {
-            self::assertStringNotContainsString(self::KEY, $error->getMessage());
-            self::assertStringNotContainsString(self::KEY, print_r($error->itemErrors, true));
+            self::assertStringNotContainsString(MockApi::KEY, $error->getMessage());
+            self::assertStringNotContainsString(MockApi::KEY, print_r($error->itemErrors, true));
         }
     }
 
@@ -102,7 +102,7 @@ final class ClientTest extends TestCase
         self::assertCount(1, $api->requests);
         $request = $api->requests[0];
         self::assertSame('https://app.clickclacks.io/api/v1/batch', $request['url']);
-        self::assertSame('Bearer ' . self::KEY, $request['headers']['Authorization']);
+        self::assertSame('Bearer ' . MockApi::KEY, $request['headers']['Authorization']);
         self::assertSame('application/json', $request['headers']['Content-Type']);
         self::assertMatchesRegularExpression('#^clickclacks-php/\d+\.\d+\.\d+ php/#', $request['headers']['User-Agent']);
         self::assertArrayNotHasKey('Content-Encoding', $request['headers']);
@@ -258,7 +258,7 @@ final class ClientTest extends TestCase
     public function testNeverLetsAnOnErrorHandlerBreakTheCaller(): void
     {
         $client = new Client([
-            'key' => self::KEY,
+            'key' => MockApi::KEY,
             'autoFlush' => false,
             'transport' => $this->api(),
             'onError' => static function (): void {
@@ -280,7 +280,7 @@ final class ClientTest extends TestCase
                 $this->lines[] = [(string) $level, (string) $message, $context];
             }
         };
-        $client = new Client(['key' => self::KEY, 'autoFlush' => false, 'transport' => $this->api(), 'logger' => $logger]);
+        $client = new Client(['key' => MockApi::KEY, 'autoFlush' => false, 'transport' => $this->api(), 'logger' => $logger]);
         $client->track(['event' => 'x']);
         self::assertSame('warning', $logger->lines[0][0]);
         self::assertStringStartsWith('[clickclacks] invalid_call:', $logger->lines[0][1]);

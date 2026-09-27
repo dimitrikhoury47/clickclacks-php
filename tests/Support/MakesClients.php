@@ -9,8 +9,6 @@ use ClickClacks\Client;
 
 trait MakesClients
 {
-    public const KEY = 'cks_live_testkey000000000000000000000000000000000';
-
     /** @var list<ClickClacksError> */
     protected array $errors = [];
     protected VirtualClock $clock;
@@ -23,7 +21,7 @@ trait MakesClients
         $this->clock ??= new VirtualClock();
 
         return new Client([
-            'key' => self::KEY,
+            'key' => MockApi::KEY,
             'transport' => $api,
             'autoFlush' => false,
             'onError' => function (ClickClacksError $error): void {

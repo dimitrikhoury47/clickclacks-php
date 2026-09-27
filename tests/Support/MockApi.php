@@ -17,6 +17,8 @@ use ClickClacks\Transport\TransportException;
  */
 final class MockApi implements Transport
 {
+    public const KEY = 'cks_live_testkey000000000000000000000000000000000';
+
     /** @var list<array{url: string, headers: array<string, string>, raw: string, json: array{items: list<array<string, mixed>>}, at: float, timeout: float}> */
     public array $requests = [];
 
