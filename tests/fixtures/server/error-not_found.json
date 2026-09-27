@@ -1,0 +1,37 @@
+{
+  "name": "error-not_found",
+  "description": "The project is not enabled for the server API.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 404,
+    "headers": {},
+    "body": {
+      "error": {
+        "code": "not_found",
+        "message": "Not found.",
+        "docs_url": "https://app.clickclacks.io/docs/api#not_found",
+        "request_id": "8c1f2d3e4f5a6b7c-FRA"
+      }
+    }
+  }
+}

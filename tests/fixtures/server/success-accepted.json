@@ -1,0 +1,55 @@
+{
+  "name": "success-accepted",
+  "description": "Every item accepted.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "type": "identify",
+          "distinct_id": "user_8412",
+          "anonymous_id": "per_k3J9sQ1xR2",
+          "properties": {
+            "plan": "pro",
+            "company": "Birds Heard"
+          }
+        },
+        {
+          "event": "Subscription started",
+          "distinct_id": "user_8412",
+          "insert_id": "sub_started_7f3a91",
+          "properties": {
+            "plan": "pro",
+            "interval": "month",
+            "$revenue": 49,
+            "$currency": "USD",
+            "$groups": {
+              "company": "cmp_311"
+            },
+            "$country": "DE",
+            "$user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15"
+          },
+          "timestamp": "2026-09-25T11:03:11.402Z"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 202,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "accepted": 2,
+      "dropped": [],
+      "errors": [],
+      "request_id": "8c1f2d3e4f5a6b7c-FRA"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "item-duplicate_insert_id",
+  "description": "A repeated insert_id in one request; the later item is refused.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          }
+        },
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 202,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "accepted": 1,
+      "dropped": [],
+      "errors": [
+        {
+          "index": 1,
+          "code": "duplicate_insert_id",
+          "field": "insert_id",
+          "message": "This insert_id already appears earlier in the batch."
+        }
+      ],
+      "request_id": "8c1f2d3e4f5a6b7c-FRA"
+    }
+  }
+}

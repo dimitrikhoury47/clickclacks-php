@@ -1,0 +1,49 @@
+{
+  "name": "item-invalid_insert_id",
+  "description": "insert_id must be 1–80 URL-safe characters.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          }
+        },
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "has spaces"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 202,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "accepted": 1,
+      "dropped": [],
+      "errors": [
+        {
+          "index": 1,
+          "code": "invalid_insert_id",
+          "field": "insert_id",
+          "message": "insert_id must be 1–80 characters of A–Z, a–z, 0–9, _ and -."
+        }
+      ],
+      "request_id": "8c1f2d3e4f5a6b7c-FRA"
+    }
+  }
+}

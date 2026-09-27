@@ -1,0 +1,28 @@
+{
+  "name": "error-invalid_json",
+  "description": "The body is not JSON.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "raw_body": "{\"items\": ["
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "error": {
+        "code": "invalid_json",
+        "message": "The request body is not valid JSON.",
+        "docs_url": "https://app.clickclacks.io/docs/api#invalid_json",
+        "request_id": "8c1f2d3e4f5a6b7c-FRA"
+      }
+    }
+  }
+}

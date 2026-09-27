@@ -1,0 +1,47 @@
+{
+  "name": "success-dropped-collection-paused",
+  "description": "Over the plan limit under pause-collection: billable items dropped, identify kept.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          }
+        },
+        {
+          "type": "identify",
+          "distinct_id": "user_8412"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 202,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10",
+      "x-clickclacks-collection": "paused-over-plan-limit"
+    },
+    "body": {
+      "accepted": 1,
+      "dropped": [
+        {
+          "index": 0,
+          "reason": "collection_paused"
+        }
+      ],
+      "errors": [],
+      "request_id": "8c1f2d3e4f5a6b7c-FRA"
+    }
+  }
+}

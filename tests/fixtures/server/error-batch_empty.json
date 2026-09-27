@@ -1,0 +1,30 @@
+{
+  "name": "error-batch_empty",
+  "description": "No items.",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": []
+    }
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "error": {
+        "code": "batch_empty",
+        "message": "A batch needs at least one item.",
+        "docs_url": "https://app.clickclacks.io/docs/api#batch_empty",
+        "request_id": "8c1f2d3e4f5a6b7c-FRA"
+      }
+    }
+  }
+}

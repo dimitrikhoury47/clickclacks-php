@@ -1,0 +1,78 @@
+{
+    "name": "clickclacks/clickclacks-php",
+    "description": "Server-side SDK for ClickClacks product analytics. Batches, gzips and retries events safely, with an optional Laravel integration.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "clickclacks",
+        "analytics",
+        "product-analytics",
+        "events",
+        "server",
+        "laravel"
+    ],
+    "homepage": "https://clickclacks.io/docs/php",
+    "support": {
+        "issues": "https://github.com/dimitrikhoury47/clickclacks-php/issues",
+        "source": "https://github.com/dimitrikhoury47/clickclacks-php",
+        "docs": "https://clickclacks.io/docs/php"
+    },
+    "authors": [
+        {
+            "name": "ClickClacks",
+            "homepage": "https://clickclacks.io"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "guzzlehttp/guzzle": "^7.8",
+        "orchestra/testbench": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^10.5 || ^11.5 || ^12.0",
+        "psr/http-client": "^1.0",
+        "psr/http-factory": "^1.0",
+        "psr/log": "^2.0 || ^3.0"
+    },
+    "suggest": {
+        "ext-zlib": "Gzips request bodies over 1 KiB.",
+        "psr/http-client": "Send through your own PSR-18 HTTP client instead of cURL.",
+        "psr/log": "Report delivery problems to a PSR-3 logger."
+    },
+    "autoload": {
+        "psr-4": {
+            "ClickClacks\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ClickClacks\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ClickClacks\\Laravel\\ClickClacksServiceProvider"
+            ],
+            "aliases": {
+                "ClickClacks": "ClickClacks\\Laravel\\Facades\\ClickClacks"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=1G",
+        "lint": "php-cs-fixer fix --dry-run --diff",
+        "format": "php-cs-fixer fix",
+        "fixtures:sync": "php scripts/sync-fixtures.php"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

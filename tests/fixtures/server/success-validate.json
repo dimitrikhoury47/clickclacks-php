@@ -1,0 +1,72 @@
+{
+  "name": "success-validate",
+  "description": "?validate=true: normalised items and errors; nothing stored or metered (200).",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch?validate=true",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Subscription started",
+          "distinct_id": "user_8412",
+          "insert_id": "sub_started_7f3a91",
+          "properties": {
+            "plan": "pro",
+            "$country": "DE"
+          }
+        },
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2292_abc",
+          "properties": {
+            "$foo": 1
+          }
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "valid": false,
+      "items": [
+        {
+          "index": 0,
+          "event_name": "Subscription started",
+          "person_id": "per_u_5JeD-ikWnHTQsLp-Bjw_lACYbmL5o1soTVTDd7XuQi4",
+          "event_id": "evt_sub_started_7f3a91",
+          "ts": "2026-09-25T12:00:00.000Z",
+          "session_id": "ses_server",
+          "properties": {
+            "plan": "pro",
+            "$country": "DE",
+            "$lib": "clickclacks-node",
+            "$lib_version": "1.0.0",
+            "$distinct_id": "user_8412",
+            "$source_id": "src_aaaaaaaaaaaaaaaaaaaaaaaa",
+            "$ingest_host": "app.clickclacks.io"
+          }
+        }
+      ],
+      "dropped": [],
+      "errors": [
+        {
+          "index": 1,
+          "code": "reserved_property",
+          "field": "properties.$foo",
+          "message": "$foo is reserved. Property names starting with $ are ClickClacks's."
+        }
+      ],
+      "request_id": "8c1f2d3e4f5a6b7c-FRA"
+    }
+  }
+}

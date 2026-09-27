@@ -1,0 +1,27 @@
+{
+  "name": "error-method_not_allowed",
+  "description": "Not POST.",
+  "request": {
+    "method": "GET",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    }
+  },
+  "response": {
+    "status": 405,
+    "headers": {
+      "allow": "POST"
+    },
+    "body": {
+      "error": {
+        "code": "method_not_allowed",
+        "message": "Use POST.",
+        "docs_url": "https://app.clickclacks.io/docs/api#method_not_allowed",
+        "request_id": "8c1f2d3e4f5a6b7c-FRA"
+      }
+    }
+  }
+}

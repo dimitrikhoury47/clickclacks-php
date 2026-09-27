@@ -1,0 +1,48 @@
+{
+  "name": "item-timestamp_before_retention",
+  "description": "/api/v1/import only (wave 2): older than the project's raw retention.",
+  "synthetic": true,
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/import",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          },
+          "timestamp": "2025-01-01T00:00:00.000Z"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "error": {
+        "code": "all_items_invalid",
+        "message": "Every item in the batch was invalid; nothing was stored.",
+        "docs_url": "https://app.clickclacks.io/docs/api#all_items_invalid",
+        "request_id": "8c1f2d3e4f5a6b7c-FRA"
+      },
+      "errors": [
+        {
+          "index": 0,
+          "code": "timestamp_before_retention",
+          "field": "timestamp",
+          "message": "This timestamp is older than the project's raw data retention."
+        }
+      ]
+    }
+  }
+}

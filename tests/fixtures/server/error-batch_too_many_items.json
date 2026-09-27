@@ -1,0 +1,40 @@
+{
+  "name": "error-batch_too_many_items",
+  "description": "More than 500 items (the request body is abbreviated to its shape: 501 items).",
+  "request": {
+    "method": "POST",
+    "path": "/api/v1/batch",
+    "headers": {
+      "authorization": "Bearer cks_live_example",
+      "content-type": "application/json",
+      "user-agent": "clickclacks-node/1.0.0"
+    },
+    "body": {
+      "items": [
+        {
+          "event": "Invoice paid",
+          "distinct_id": "user_8412",
+          "insert_id": "inv_2291_abc",
+          "properties": {
+            "amount_cents": 4900
+          }
+        },
+        "… 501 items in all …"
+      ]
+    }
+  },
+  "response": {
+    "status": 400,
+    "headers": {
+      "ratelimit-policy": "1000;w=1, 5000;w=10"
+    },
+    "body": {
+      "error": {
+        "code": "batch_too_many_items",
+        "message": "A batch may hold at most 500 items.",
+        "docs_url": "https://app.clickclacks.io/docs/api#batch_too_many_items",
+        "request_id": "8c1f2d3e4f5a6b7c-FRA"
+      }
+    }
+  }
+}
