@@ -222,10 +222,6 @@ item, which the API stores as a free `$group_identify` event; it has no person.
 - `group` records the profile only. An event counts for a group when it carries the group:
   pass `groups` to `track`.
 
-Group support is rolling out on the API. Until it reaches your project, a `group` item is
-refused with the per-item code `item_type_not_yet_supported`, which reaches `onError` as
-an `item_errors` error; nothing else in the batch is affected.
-
 ### `flush(?int $timeout = null): FlushResult`
 
 Sends everything queued now and returns when it's delivered, refused or given up on. With
